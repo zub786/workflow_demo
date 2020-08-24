@@ -1,0 +1,21 @@
+name: Workflow Demo
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
+      with:
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        AWS_S3_BUCKET: 'csevigny'
+        AWS_ACCESS_KEY_ID: 'ASIAZVFSM2ZE6LHJOEPB'
+        AWS_SECRET_ACCESS_KEY: '9Z+VtPmmWrRiC7xy8adB04Ey/QxfVqWXLY8AxkOd'
+        AWS_REGION: 'us-west-1'   # optional: defaults to us-east-1
+        #SOURCE_DIR: 'public'      # optional: defaults to entire repository
